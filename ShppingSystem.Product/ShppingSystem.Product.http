@@ -1,0 +1,6 @@
+@ShppingSystem.Product_HostAddress = http://localhost:5298
+
+GET {{ShppingSystem.Product_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

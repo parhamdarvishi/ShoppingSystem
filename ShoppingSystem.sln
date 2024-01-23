@@ -1,0 +1,54 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34408.163
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{3C8ACB2E-2D73-4655-8B1D-D8A310564E76}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Product", "Product", "{AB98484B-36A8-4B66-A8C1-0E08106EC50C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShppingSystem.Product.Api", "ShppingSystem.Product\ShppingSystem.Product.Api.csproj", "{540FE749-3BA8-4F69-B80D-0DB40C282B08}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Basket", "Basket", "{96E0F2A1-F955-411F-B7E0-935D5029CBDC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notification", "Notification", "{2F8BE3C5-1AB8-4F32-9600-7FC68B091F4B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{6FD50918-98F6-4528-84CF-29C9111CA085}"
+	ProjectSection(SolutionItems) = preProject
+		Info.txt = Info.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Captcha", "Captcha", "{3ECBCE2A-10F8-440D-8975-27B45099D814}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoppingSystem.Captcha.Api", "ShoppingSystem.Captcha.Api\ShoppingSystem.Captcha.Api.csproj", "{6A4852E1-6E6B-47DD-9BA0-A2A54F9F0FEB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{540FE749-3BA8-4F69-B80D-0DB40C282B08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{540FE749-3BA8-4F69-B80D-0DB40C282B08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{540FE749-3BA8-4F69-B80D-0DB40C282B08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{540FE749-3BA8-4F69-B80D-0DB40C282B08}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A4852E1-6E6B-47DD-9BA0-A2A54F9F0FEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A4852E1-6E6B-47DD-9BA0-A2A54F9F0FEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A4852E1-6E6B-47DD-9BA0-A2A54F9F0FEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A4852E1-6E6B-47DD-9BA0-A2A54F9F0FEB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{AB98484B-36A8-4B66-A8C1-0E08106EC50C} = {3C8ACB2E-2D73-4655-8B1D-D8A310564E76}
+		{540FE749-3BA8-4F69-B80D-0DB40C282B08} = {AB98484B-36A8-4B66-A8C1-0E08106EC50C}
+		{96E0F2A1-F955-411F-B7E0-935D5029CBDC} = {3C8ACB2E-2D73-4655-8B1D-D8A310564E76}
+		{2F8BE3C5-1AB8-4F32-9600-7FC68B091F4B} = {3C8ACB2E-2D73-4655-8B1D-D8A310564E76}
+		{3ECBCE2A-10F8-440D-8975-27B45099D814} = {3C8ACB2E-2D73-4655-8B1D-D8A310564E76}
+		{6A4852E1-6E6B-47DD-9BA0-A2A54F9F0FEB} = {3ECBCE2A-10F8-440D-8975-27B45099D814}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8CFD8836-0EF9-4341-A5E7-CB0CBDCF58A2}
+	EndGlobalSection
+EndGlobal
