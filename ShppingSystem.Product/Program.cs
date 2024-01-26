@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using ShppingSystem.Product.Api.Businesses;
+using ShppingSystem.Product.Api.Extenstions;
 using ShppingSystem.Product.Api.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +17,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<ProductContext>(option => option.UseInMemoryDatabase(databaseName:"ProductDb"));
 
+builder.Services.AddScoped<IProductBusiness,ProductBusiness>(); 
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -29,5 +33,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseLogUrl();
 
 app.Run();
