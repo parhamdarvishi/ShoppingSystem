@@ -1,11 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace ShppingSystem.Product.Api.Controllers
+namespace ShoppingSystem.Product.Api.Controllers;
+
+[Route("api/v1/[controller]")]
+[ApiController]
+public class BaseController : Controller
 {
-    [Route("api/v1/[controller]")]
-    [ApiController]
-    public class BaseController : Controller
-    {
-        
-    }
+
 }

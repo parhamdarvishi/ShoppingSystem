@@ -24,4 +24,9 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ShoppingSystem.Product.Application\ShoppingSystem.Product.Application.csproj" />
+    <ProjectReference Include="..\ShoppingSystem.Product.Infrastructure\ShoppingSystem.Product.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

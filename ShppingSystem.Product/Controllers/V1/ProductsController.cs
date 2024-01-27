@@ -1,15 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ShppingSystem.Product.Api.Businesses;
+using ShoppingSystem.Product.Application;
 using ShppingSystem.Product.Api.Dtos;
 using System.Net.Mime;
 
-namespace ShppingSystem.Product.Api.Controllers.V1;
+namespace ShoppingSystem.Product.Api.Controllers.V1;
 public class ProductsController : BaseController
 {
-    private readonly IProductBusiness _productBusiness;
-    public ProductsController(IProductBusiness productBusiness)
+    private readonly IProductService _productService;
+    public ProductsController(IProductService productService)
     {
-        _productBusiness = productBusiness;
+        _productService = productService;
     }
 
     [HttpGet]
@@ -17,7 +17,7 @@ public class ProductsController : BaseController
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<IActionResult> GetProducts()
     {
-        List<Models.Product> products = _productBusiness.GetProducts();
+        var products = _productService.GetProducts();
         return Ok(products);
     }
 
@@ -27,7 +27,7 @@ public class ProductsController : BaseController
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public IActionResult GetProduct(int id)
     {
-        var product = _productBusiness.GetProduct(id);
+        var product = _productService.GetProduct(id);
         return product == null ? NotFound() : Ok(product);
     }
 
@@ -40,15 +40,14 @@ public class ProductsController : BaseController
         if (string.IsNullOrEmpty(productDto.name) || string.IsNullOrEmpty(productDto.description) || productDto.price == 0)
             return BadRequest();
 
-        Models.Product product = new()
+        Domain.Entities.Product product = new()
         {
             Name = productDto.name,
             Price = productDto.price,
             Description = productDto.description,
-            CreationAt = DateTime.Now,
             IsDeleted = false
         };
-        _productBusiness.AddProduct(product);
+        _productService.AddProduct(product);
 
         return CreatedAtAction(nameof(GetProduct), new { id = product.Id }, product);
     }

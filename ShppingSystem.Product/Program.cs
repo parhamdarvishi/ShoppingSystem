@@ -1,7 +1,6 @@
-using Microsoft.EntityFrameworkCore;
-using ShppingSystem.Product.Api.Businesses;
+using ShoppingSystem.Product.Application;
+using ShoppingSystem.Product.Infrastructure;
 using ShppingSystem.Product.Api.Extenstions;
-using ShppingSystem.Product.Api.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,9 +14,10 @@ builder.Services.AddSwaggerGen();
 //string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 //builder.Services.AddDbContext<ProductContext>(option => option.UseSqlServer(connectionString));
 
-builder.Services.AddDbContext<ProductContext>(option => option.UseInMemoryDatabase(databaseName:"ProductDb"));
-
-builder.Services.AddScoped<IProductBusiness,ProductBusiness>(); 
+//builder.Services.AddDbContext<ProductContext>(option => option.UseInMemoryDatabase(databaseName: "ProductDb"));
+builder.Services
+    .RegisterInfrastructureServices(builder.Configuration)
+    .RegisterApplicationServices();
 
 var app = builder.Build();
 

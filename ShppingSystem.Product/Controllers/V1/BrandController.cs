@@ -1,21 +1,22 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using ShppingSystem.Product.Api.Models;
+using ShoppingSystem.Product.Domain.Entities;
+using ShoppingSystem.Product.Infrastructure.Contracts;
 
-namespace ShppingSystem.Product.Api.Controllers.V1;
+namespace ShoppingSystem.Product.Api.Controllers.V1;
 
 public class BrandController : BaseController
 {
-    private readonly ProductContext _context;
-    public BrandController(ProductContext context)
+    private readonly IProductContext _context;
+    public BrandController(IProductContext context)
     {
         _context = context;
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetBrands()
+    public IActionResult GetBrands()
     {
-        List<Brand> brands = await _context.Brands.ToListAsync();
+        var brands = _context.Set<Brand>().ToList();
         return Ok(brands);
     }
+
 }
