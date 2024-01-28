@@ -1,19 +1,19 @@
-﻿using ShoppingSystem.Product.Infrastructure.Contracts;
+﻿using ShoppingSystem.Product.Domain.Contracts;
 using System.Linq.Expressions;
 
-namespace ShoppingSystem.Product.Application;
+namespace ShoppingSystem.Product.Infrastructure.Persistence.Repositories;
 
-public class ProductService : IProductService
+public class ProductRepository : IGenericRepository<Domain.Entities.Product>
 {
-    private readonly IProductContext _context;
-    public ProductService(IProductContext context)
+    private readonly ProductContext _context;
+    public ProductRepository(ProductContext context)
     {
         _context = context;
     }
 
     public bool Add(Domain.Entities.Product entity)
     {
-        _context.Pro.Add(entity);
+        _context.Products.Add(entity);
         return true;
     }
 

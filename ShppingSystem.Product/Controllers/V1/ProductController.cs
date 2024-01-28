@@ -4,10 +4,10 @@ using ShppingSystem.Product.Api.Dtos;
 using System.Net.Mime;
 
 namespace ShoppingSystem.Product.Api.Controllers.V1;
-public class ProductsController : BaseController
+public class ProductController : BaseController
 {
     private readonly IProductService _productService;
-    public ProductsController(IProductService productService)
+    public ProductController(IProductService productService)
     {
         _productService = productService;
     }
@@ -15,7 +15,7 @@ public class ProductsController : BaseController
     [HttpGet]
     [Consumes(MediaTypeNames.Application.Json)]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<IActionResult> GetProducts()
+    public async Task<IActionResult> Get()
     {
         var products = _productService.GetProducts();
         return Ok(products);
@@ -25,7 +25,7 @@ public class ProductsController : BaseController
     [Consumes(MediaTypeNames.Application.Json)]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public IActionResult GetProduct(int id)
+    public IActionResult GetById(int id)
     {
         var product = _productService.GetProduct(id);
         return product == null ? NotFound() : Ok(product);
@@ -49,7 +49,7 @@ public class ProductsController : BaseController
         };
         _productService.AddProduct(product);
 
-        return CreatedAtAction(nameof(GetProduct), new { id = product.Id }, product);
+        return CreatedAtAction(nameof(GetById), new { id = product.Id }, product);
     }
 
 }
