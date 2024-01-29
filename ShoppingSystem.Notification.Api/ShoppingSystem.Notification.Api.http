@@ -1,0 +1,6 @@
+@ShoppingSystem.Notification.Api_HostAddress = http://localhost:5003
+
+GET {{ShoppingSystem.Notification.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
