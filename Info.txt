@@ -9,3 +9,7 @@ For connecting to InMemory
 Microsoft.EntityFrameworkCore.InMemory
 
 https://learn.microsoft.com/en-us/aspnet/core/tutorials/first-web-api?view=aspnetcore-7.0&tabs=visual-studio
+
+
+npgsql -> PostgreSql
+JwtBearer
