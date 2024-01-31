@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using ShoppingSystem.Product.Application;
 using ShppingSystem.Product.Api.Dtos;
 using System.Net.Mime;
@@ -6,10 +7,12 @@ using System.Net.Mime;
 namespace ShoppingSystem.Product.Api.Controllers.V1;
 public class ProductsController : BaseController
 {
+    private readonly IMapper _mapper;
     private readonly IProductService _productService;
-    public ProductsController(IProductService productService)
+    public ProductsController(IProductService productService, IMapper mapper)
     {
         _productService = productService;
+        _mapper = mapper;
     }
 
     [HttpGet]
@@ -40,13 +43,7 @@ public class ProductsController : BaseController
         if (string.IsNullOrEmpty(productDto.name) || string.IsNullOrEmpty(productDto.description) || productDto.price == 0)
             return BadRequest();
 
-        Domain.Entities.Product product = new()
-        {
-            Name = productDto.name,
-            Price = productDto.price,
-            Description = productDto.description,
-            IsDeleted = false
-        };
+        var product = _mapper.Map<AddProductDto, Domain.Entities.Product>(productDto);
         _productService.AddProduct(product);
 
         return CreatedAtAction(nameof(GetProduct), new { id = product.Id }, product);
