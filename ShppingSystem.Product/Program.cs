@@ -1,3 +1,5 @@
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using ShoppingSystem.Product.Application;
 using ShoppingSystem.Product.Infrastructure;
 using ShppingSystem.Product.Api.Extenstions;
@@ -18,6 +20,9 @@ builder.Services.AddSwaggerGen();
 builder.Services
     .RegisterInfrastructureServices(builder.Configuration)
     .RegisterApplicationServices();
+
+builder.Services.AddFluentValidationAutoValidation();
+builder.Services.AddValidatorsFromAssemblyContaining<Program>();
 
 var app = builder.Build();
 
