@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ShoppingSystem.Product.Domain.Entities;
 using ShoppingSystem.Product.Infrastructure.Contracts;
 
 namespace ShoppingSystem.Product.Api.Controllers.V1;

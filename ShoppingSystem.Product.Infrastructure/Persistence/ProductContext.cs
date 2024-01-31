@@ -5,7 +5,7 @@ using ShoppingSystem.Shared.Response;
 
 namespace ShoppingSystem.Product.Infrastructure.Persistence;
 
-public class ProductContext : DbContext, IProductContext
+public class ProductContext : DbContext
 {
     public ProductContext(DbContextOptions options) : base(options)
     {
@@ -15,7 +15,7 @@ public class ProductContext : DbContext, IProductContext
     public DbSet<Brand> Brands { get; set; }
     public DbSet<Domain.Entities.Product> Products { get; set; }
 
-    Task<Response> IProductContext.SaveChangesAsync(CancellationToken cancellationToken)
+    Task<Response> SaveChangesAsync(CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }

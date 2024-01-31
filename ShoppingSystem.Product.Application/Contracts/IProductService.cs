@@ -1,8 +1,8 @@
-﻿namespace ShoppingSystem.Product.Application;
+﻿using ShoppingSystem.Product.Domain.Contracts;
 
-public interface IProductService
+namespace ShoppingSystem.Product.Application;
+
+public interface IProductService:IGenericRepository<Domain.Entities.Product>
 {
-    Domain.Entities.Product GetProduct(int id);
-    List<Domain.Entities.Product> GetProducts();
-    bool AddProduct(Domain.Entities.Product product);
+
 }
