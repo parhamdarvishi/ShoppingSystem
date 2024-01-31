@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using ShoppingSystem.Product.Application.Implementation;
 
 namespace ShoppingSystem.Product.Application;
 

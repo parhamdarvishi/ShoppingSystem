@@ -20,7 +20,7 @@ public class ProductsController : BaseController
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<IActionResult> GetProducts()
     {
-        var products = _productService.GetProducts();
+        var products = _productService.GetAll();
         return Ok(products);
     }
 
@@ -30,7 +30,7 @@ public class ProductsController : BaseController
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public IActionResult GetProduct(int id)
     {
-        var product = _productService.GetProduct(id);
+        var product = _productService.GetById(id);
         return product == null ? NotFound() : Ok(product);
     }
 
@@ -44,7 +44,7 @@ public class ProductsController : BaseController
             return BadRequest();
 
         var product = _mapper.Map<AddProductDto, Domain.Entities.Product>(productDto);
-        _productService.AddProduct(product);
+        _productService.Add(product);
 
         return CreatedAtAction(nameof(GetProduct), new { id = product.Id }, product);
     }

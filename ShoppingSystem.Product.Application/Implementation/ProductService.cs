@@ -1,46 +1,32 @@
-﻿using ShoppingSystem.Product.Infrastructure.Contracts;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace ShoppingSystem.Product.Application;
+namespace ShoppingSystem.Product.Application.Implementation;
 
 public class ProductService : IProductService
 {
-    private readonly IProductContext _context;
-    public ProductService(IProductContext context)
-    {
-        _context = context;
-    }
-
     public bool Add(Domain.Entities.Product entity)
     {
-        _context.Pro.Add(entity);
-        return true;
+        throw new NotImplementedException();
     }
 
     public bool Delete(int id)
     {
-        var product = _context.Products.Find(id);
-        if (product is { })
-        {
-            _context.Products.Remove(product);
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        throw new NotImplementedException();
     }
 
     public IEnumerable<Domain.Entities.Product> GetAll()
     {
-        var products = _context.Products.ToList();
-        return products;
+        throw new NotImplementedException();
     }
 
     public Domain.Entities.Product GetById(int id)
     {
-        var product = _context.Products.Find(id);
-        return product;
+        throw new NotImplementedException();
     }
 
     public Domain.Entities.Product Select(Expression<Func<Domain.Entities.Product, bool>> predicate)

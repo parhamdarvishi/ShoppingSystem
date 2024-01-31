@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ShoppingSystem.Product.Domain.Entities;
-using ShoppingSystem.Product.Infrastructure.Contracts;
 using ShoppingSystem.Shared.Response;
 
 namespace ShoppingSystem.Product.Infrastructure.Persistence;
