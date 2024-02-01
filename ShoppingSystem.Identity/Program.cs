@@ -2,9 +2,11 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using ShoppingSystem.Identity.Application.Interfaces;
 using ShoppingSystem.Identity.Application.Models.Jwt;
 using ShoppingSystem.Identity.Domains.Entities;
 using ShoppingSystem.Identity.Infrastructure.Persistence;
+using ShoppingSystem.Identity.Infrastructure.Repositories;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,12 +18,15 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddTransient<IJwtService, JwtService>();
+builder.Services.AddTransient<IUserService, UserService>();
+
 builder.Services.Configure<JwtOption>(option =>
 {
     option.Issuer = "localhost";
     option.Audience = "localhost";
     option.Key = "jksndkjasaslkdas";
-    option.ExpirationInMinute = "20";
+    option.ExpirationInMinute = 20;
 });
 
 string connectionString = builder.Configuration.GetConnectionString("IdentityDb");
