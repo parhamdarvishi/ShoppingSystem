@@ -1,28 +1,28 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using ShoppingSystem.Product.Api.Dtos;
-using ShoppingSystem.Product.Application;
+using ShoppingSystem.Product.Application.Contracts;
 using ShppingSystem.Product.Api.Dtos;
 using System.Net.Mime;
 
 namespace ShoppingSystem.Product.Api.Controllers.V1;
 
-public class ProductsController : BaseController
+public class ProductController : BaseController
 {
     private readonly IMapper _mapper;
-    private readonly IProductService _productService;
-    public ProductsController(IProductService productService, IMapper mapper)
+    private readonly IProductRepository _repository;
+    public ProductController(IProductRepository repository, IMapper mapper)
     {
-        _productService = productService;
+        _repository = repository;
         _mapper = mapper;
     }
 
     [HttpGet]
     [Consumes(MediaTypeNames.Application.Json)]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<IActionResult> GetAll()
+    public IActionResult GetAll()
     {
-        var products = _productService.GetAll();
+        var products = _repository.GetAll();
         return Ok(products);
     }
 
@@ -32,7 +32,7 @@ public class ProductsController : BaseController
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public IActionResult GetById([FromRoute]int id)
     {
-        var product = _productService.GetById(id);
+        var product = _repository.GetById(id);
         return product == null ? NotFound() : Ok(product);
     }
 
@@ -46,8 +46,8 @@ public class ProductsController : BaseController
             return BadRequest();
 
         var product = _mapper.Map<AddProductDto, Domain.Entities.Product>(productDto);
-        _productService.Add(product);
-
+        _repository.Add(product);
+        
         return CreatedAtAction(nameof(GetById), new { id = product.Id }, product);
     }
 
@@ -57,7 +57,10 @@ public class ProductsController : BaseController
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public IActionResult Delete([FromRoute] int id)
     {
-        bool deleted = _productService.Delete(id);
+        var item = _repository.GetById(id: id);
+        if (item is null)
+            return NotFound();
+        bool deleted = _repository.Delete(item);
         if (deleted)
             return Ok();
         else
@@ -72,7 +75,7 @@ public class ProductsController : BaseController
     {
         var product = _mapper.Map<UpdateProductDto, Domain.Entities.Product>(productDto);
 
-        bool updated = _productService.Update(product);
+        bool updated = _repository.Update(product);
         if (updated)
             return Ok();
         else

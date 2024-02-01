@@ -1,13 +1,14 @@
-﻿using System.Linq.Expressions;
+﻿namespace ShoppingSystem.Product.Domain.Contracts;
 
-namespace ShoppingSystem.Product.Domain.Contracts;
-
-public interface IGenericRepository<T> where T : class
+public interface IGenericRepository<TEntity> where TEntity : class
 {
-    IEnumerable<T> GetAll();
-    T GetById(int id);
-    bool Delete(int id);
-    bool Add(T entity);
-    bool Update(T entity);
-    public T Select(Expression<Func<T, bool>> predicate);
+    IQueryable<TEntity> GetAll();
+
+    TEntity GetById(int id);
+
+    bool Add(TEntity entity);
+
+    bool Update(TEntity entity);
+
+    bool Delete(TEntity entity);
 }

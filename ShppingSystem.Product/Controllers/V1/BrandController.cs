@@ -1,17 +1,22 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ShoppingSystem.Product.Application.Contracts;
+using System.Net.Mime;
 
 namespace ShoppingSystem.Product.Api.Controllers.V1;
 
 public class BrandController : BaseController
 {
-    private readonly IBrandService _service;
-    public BrandController(IBrandService service) =>  _service = service;
+    private readonly IBrandRepository _repository;
+    public BrandController(IBrandRepository repository) => _repository = repository;
 
+    [Route("{id}")]
     [HttpGet]
-    public IActionResult GetBrands()
+    [Consumes(MediaTypeNames.Application.Json)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public IActionResult GetById([FromRoute] int id)
     {
-        return Ok();
+        var item = _repository.GetById(id);
+        return Ok(item);
     }
 
 }

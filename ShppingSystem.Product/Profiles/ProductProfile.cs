@@ -4,9 +4,9 @@ using ShppingSystem.Product.Api.Dtos;
 
 namespace ShoppingSystem.Product.Api.Profiles;
 
-public class ProductProfile : Profile
+public sealed class ProductProfile : Profile
 {
-    protected ProductProfile()
+    public ProductProfile()
     {
         CreateMap<AddProductDto, Domain.Entities.Product>();
         CreateMap<UpdateProductDto, Domain.Entities.Product>();

@@ -20,3 +20,8 @@ Microsoft.EntityFrameworkCore.SqlServer
 Microsoft.EntityFrameworkCore.Tools 
 Microsoft.AspNetCore.Identity.EntityFrameworkCore 
 Microsoft.AspNetCore.Authentication.JwtBearer 
+
+
+
+1. Create Repository class and make it asbtract in persistance
+

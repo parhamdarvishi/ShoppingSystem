@@ -1,12 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ShoppingSystem.Product.Application;
 using ShoppingSystem.Product.Domain.Entities;
 using ShoppingSystem.Shared.Response;
 
 namespace ShoppingSystem.Product.Infrastructure.Persistence;
 
-public class ProductContext : DbContext
+public class ApplicationDbContext : DbContext
 {
-    public ProductContext(DbContextOptions options) : base(options)
+    public ApplicationDbContext(DbContextOptions options) : base(options)
     {
     }
 
@@ -14,8 +15,8 @@ public class ProductContext : DbContext
     public DbSet<Brand> Brands { get; set; }
     public DbSet<Domain.Entities.Product> Products { get; set; }
 
-    Task<Response> SaveChangesAsync(CancellationToken cancellationToken)
+    protected override void OnModelCreating(ModelBuilder builder)
     {
-        throw new NotImplementedException();
+        base.OnModelCreating(builder);
     }
 }
