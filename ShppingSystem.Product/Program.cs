@@ -1,5 +1,6 @@
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using ShoppingSystem.Product.Api.Middleware;
 using ShoppingSystem.Product.Api.Profiles;
 using ShoppingSystem.Product.Application;
 using ShoppingSystem.Product.Infrastructure;
@@ -44,5 +45,7 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.UseLogUrl();
+
+app.UseGlobalException();
 
 app.Run();
