@@ -2,13 +2,13 @@
 
 public interface IGenericRepository<TEntity> where TEntity : class
 {
-    IQueryable<TEntity> GetAll();
+    IQueryable<TEntity> GetAllAsync();
 
-    TEntity GetById(int id);
+    Task<TEntity> GetByIdAsync(int id);
 
-    bool Add(TEntity entity);
+    Task<bool> AddAsync(TEntity entity);
 
-    bool Update(TEntity entity);
+    Task<bool> UpdateAsync(TEntity entity);
 
-    bool Delete(TEntity entity);
+    Task<bool> DeleteAsync(TEntity entity);
 }

@@ -12,37 +12,37 @@ public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEnt
         _dbContext = dbContext;
     }
 
-    public bool Add(TEntity entity)
+    public async Task<bool> AddAsync(TEntity entity)
     {
         //First Way
         //_dbContext.Add(entity);
 
         //Second way
-        _dbContext.Set<TEntity>().Add(entity);
-        _dbContext.SaveChanges();
+        await _dbContext.Set<TEntity>().AddAsync(entity);
+        await _dbContext.SaveChangesAsync();
         return true;
     }
 
-    public bool Update(TEntity entity)
+    public async Task<bool> UpdateAsync(TEntity entity)
     {
         _dbContext.Set<TEntity>().Update(entity);
-        _dbContext.SaveChanges();
+        await _dbContext.SaveChangesAsync();
         return true;
     }
 
-    public bool Delete(TEntity entity)
+    public async Task<bool> DeleteAsync(TEntity entity)
     {
         _dbContext.Set<TEntity>().Remove(entity);
-        _dbContext.SaveChanges();
+        await _dbContext.SaveChangesAsync();
         return true;
     }
 
-    public IQueryable<TEntity> GetAll()
+    public IQueryable<TEntity> GetAllAsync()
     {
         return _dbContext.Set<TEntity>().AsNoTracking();
     }
 
-    public TEntity GetById(int id)
+    public Task<TEntity> GetByIdAsync(int id)
     {
         //return  _dbContext.Set<TEntity>()
         //             .AsNoTracking()
@@ -50,5 +50,5 @@ public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEnt
 
         throw new NotImplementedException();
     }
-
+    
 }
