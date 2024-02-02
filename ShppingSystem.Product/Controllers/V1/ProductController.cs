@@ -22,7 +22,7 @@ public class ProductController : BaseController
     [ProducesResponseType(StatusCodes.Status200OK)]
     public IActionResult GetAll()
     {
-        var products = _repository.GetAll();
+        var products = _repository.GetAllAsync();
         return Ok(products);
     }
 
@@ -30,9 +30,9 @@ public class ProductController : BaseController
     [Consumes(MediaTypeNames.Application.Json)]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public IActionResult GetById([FromRoute]int id)
+    public async Task<IActionResult> GetById([FromRoute] int id)
     {
-        var product = _repository.GetById(id);
+        var product = await _repository.GetByIdAsync(id);
         return product == null ? NotFound() : Ok(product);
     }
 
@@ -40,14 +40,14 @@ public class ProductController : BaseController
     [Consumes(MediaTypeNames.Application.Json)]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public IActionResult Add([FromBody] AddProductDto productDto)
+    public async Task<IActionResult> Add([FromBody] AddProductDto productDto)
     {
         if (string.IsNullOrEmpty(productDto.name) || string.IsNullOrEmpty(productDto.description) || productDto.price == 0)
             return BadRequest();
 
         var product = _mapper.Map<AddProductDto, Domain.Entities.Product>(productDto);
-        _repository.Add(product);
-        
+        await _repository.AddAsync(product);
+
         return CreatedAtAction(nameof(GetById), new { id = product.Id }, product);
     }
 
@@ -55,12 +55,12 @@ public class ProductController : BaseController
     [Consumes(MediaTypeNames.Application.Json)]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public IActionResult Delete([FromRoute] int id)
+    public async Task<IActionResult> Delete([FromRoute] int id)
     {
-        var item = _repository.GetById(id: id);
+        var item = await _repository.GetByIdAsync(id: id);
         if (item is null)
             return NotFound();
-        bool deleted = _repository.Delete(item);
+        bool deleted = await _repository.DeleteAsync(item);
         if (deleted)
             return Ok();
         else
@@ -71,11 +71,11 @@ public class ProductController : BaseController
     [Consumes(MediaTypeNames.Application.Json)]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public IActionResult Update([FromBody] UpdateProductDto productDto)
+    public async Task<IActionResult> Update([FromBody] UpdateProductDto productDto)
     {
         var product = _mapper.Map<UpdateProductDto, Domain.Entities.Product>(productDto);
 
-        bool updated = _repository.Update(product);
+        bool updated = await _repository.UpdateAsync(product);
         if (updated)
             return Ok();
         else
