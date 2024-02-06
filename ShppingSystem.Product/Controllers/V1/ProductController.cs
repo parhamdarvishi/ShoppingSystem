@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using ShoppingSystem.Product.Api.Dtos;
 using ShoppingSystem.Product.Application.Contracts;
@@ -9,12 +10,14 @@ namespace ShoppingSystem.Product.Api.Controllers.V1;
 
 public class ProductController : BaseController
 {
+    private readonly IMediator _mediator;
     private readonly IMapper _mapper;
     private readonly IProductRepository _repository;
-    public ProductController(IProductRepository repository, IMapper mapper)
+    public ProductController(IProductRepository repository, IMapper mapper, IMediator mediator)
     {
         _repository = repository;
         _mapper = mapper;
+        _mediator = mediator;
     }
 
     [HttpGet]
