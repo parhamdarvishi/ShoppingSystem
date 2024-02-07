@@ -1,58 +1,34 @@
-﻿using AutoMapper;
-using MediatR;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using ShoppingSystem.Product.Api.Dtos;
-using ShoppingSystem.Product.Application.Contracts;
-using ShppingSystem.Product.Api.Dtos;
+using ShoppingSystem.Product.Application.Usecases.Product.Commands.AddProduct;
+using ShoppingSystem.Product.Application.Usecases.Product.Queries.GetAllProducts;
+using ShoppingSystem.Product.Application.Usecases.Product.Queries.GetProductById;
 using System.Net.Mime;
 
 namespace ShoppingSystem.Product.Api.Controllers.V1;
 
 public class ProductController : BaseController
 {
-    private readonly IMediator _mediator;
-    private readonly IMapper _mapper;
-    private readonly IProductRepository _repository;
-    public ProductController(IProductRepository repository, IMapper mapper, IMediator mediator)
-    {
-        _repository = repository;
-        _mapper = mapper;
-        _mediator = mediator;
-    }
 
     [HttpGet]
     [Consumes(MediaTypeNames.Application.Json)]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public IActionResult GetAll()
-    {
-        var products = _repository.GetAll();
-        return Ok(products);
-    }
+    public async Task<IActionResult> GetAll(CancellationToken ct = default)
+        => await SendAsync(new GetAllProductsQuery(), ct);
 
     [HttpGet("{id}")]
     [Consumes(MediaTypeNames.Application.Json)]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public IActionResult GetById([FromRoute]int id)
-    {
-        var product = _repository.GetById(id);
-        return product == null ? NotFound() : Ok(product);
-    }
+    public async Task<IActionResult> GetById([FromRoute] int id, CancellationToken ct = default)
+        => await SendAsync(new GetProductByIdQuery(id), ct);
 
     [HttpPost]
     [Consumes(MediaTypeNames.Application.Json)]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public IActionResult Add([FromBody] AddProductDto productDto)
-    {
-        if (string.IsNullOrEmpty(productDto.name) || string.IsNullOrEmpty(productDto.description) || productDto.price == 0)
-            return BadRequest();
-
-        var product = _mapper.Map<AddProductDto, Domain.Entities.Product>(productDto);
-        _repository.Add(product);
-        
-        return CreatedAtAction(nameof(GetById), new { id = product.Id }, product);
-    }
+    public async Task<IActionResult> Add([FromBody] AddProductCommand addProductCommand, CancellationToken ct = default)
+        => await SendAsync(addProductCommand, ct);
 
     [HttpDelete]
     [Consumes(MediaTypeNames.Application.Json)]
