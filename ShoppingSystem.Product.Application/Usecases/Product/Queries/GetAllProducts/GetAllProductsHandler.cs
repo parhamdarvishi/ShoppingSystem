@@ -15,7 +15,7 @@ public class GetAllProductsHandler : IRequestHandler<GetAllProductsQuery, Respon
 
     public async Task<Response<object>> Handle(GetAllProductsQuery request, CancellationToken cancellationToken)
     {
-        var products = _repository.GetAll();
+        var products = await _repository.GetAllAsync();
         return Response.Success<object>(products);
     }
 }

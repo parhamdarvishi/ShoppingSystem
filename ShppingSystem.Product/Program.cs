@@ -2,29 +2,28 @@ using FluentValidation;
 using FluentValidation.AspNetCore;
 using ShoppingSystem.Product.Api.Middleware;
 using ShoppingSystem.Product.Application;
+using ShoppingSystem.Product.Application.Usecases.Product.Queries.GetAllProducts;
 using ShoppingSystem.Product.Infrastructure;
 using ShppingSystem.Product.Api.Extenstions;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 
 //string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 //builder.Services.AddDbContext<ProductContext>(option => option.UseSqlServer(connectionString));
 
 //builder.Services.AddDbContext<ProductContext>(option => option.UseInMemoryDatabase(databaseName: "ProductDb"));
 builder.Services
+    .RegisterApplicationServices()
     .RegisterInfrastructureServices(builder.Configuration)
-    .RegisterApplicationServices();
+    ;
 
-builder.Services.AddFluentValidationAutoValidation();
-builder.Services.AddValidatorsFromAssemblyContaining<Program>();
-
+builder.Services.AddControllers();
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 
 

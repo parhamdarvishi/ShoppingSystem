@@ -37,9 +37,9 @@ public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEnt
         return true;
     }
 
-    public IQueryable<TEntity> GetAllAsync()
+    public async Task<IList<TEntity>> GetAllAsync()
     {
-        return _dbContext.Set<TEntity>().AsNoTracking();
+        return await _dbContext.Set<TEntity>().AsNoTracking().ToListAsync();
     }
 
     public Task<TEntity> GetByIdAsync(int id)
@@ -50,5 +50,5 @@ public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEnt
 
         throw new NotImplementedException();
     }
-    
+
 }

@@ -2,7 +2,7 @@
 
 public interface IGenericRepository<TEntity> where TEntity : class
 {
-    IQueryable<TEntity> GetAllAsync();
+    Task<IList<TEntity>> GetAllAsync();
 
     Task<TEntity> GetByIdAsync(int id);
 

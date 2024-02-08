@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.Extensions.DependencyInjection;
 using ShoppingSystem.Product.Application.Usecases.Product;
 using System.Reflection;
@@ -10,11 +11,16 @@ public static class ConfigureServices
     public static IServiceCollection RegisterApplicationServices(this IServiceCollection services)
     {
         services.AddAutoMapper(typeof(ProductProfile));
-        services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
-        services.AddMediatR(cfg =>
-        {
-            cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
-        });
+        services.AddFluentValidationAutoValidation();
+      
+
+        var assembly = typeof(ConfigureServices).Assembly;
+
+        services.AddMediatR(configuration =>
+            configuration.RegisterServicesFromAssembly(assembly));
+
+        services.AddValidatorsFromAssembly(assembly);
+
         return services;
     }
 }

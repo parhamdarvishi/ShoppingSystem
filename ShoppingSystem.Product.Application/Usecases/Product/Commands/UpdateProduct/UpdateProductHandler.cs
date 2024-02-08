@@ -18,11 +18,10 @@ public class UpdateProductHandler : IRequestHandler<UpdateProductCommand, Respon
         _mediator = mediator;
     }
 
-
     public async Task<Response<int>> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
     {
         var product = _mapper.Map<UpdateProductCommand, Domain.Entities.Product>(request);
-        _repository.Add(product);
+        await _repository.AddAsync(product);
 
         return Response.Success<int>(product.Id);
     }
