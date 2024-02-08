@@ -2,7 +2,7 @@
 using ShoppingSystem.Product.Application.Usecases.Product.Commands.AddProduct;
 using ShoppingSystem.Product.Application.Usecases.Product.Commands.UpdateProduct;
 
-namespace ShoppingSystem.Product.Api.Profiles;
+namespace ShoppingSystem.Product.Application.Usecases.Product;
 
 public sealed class ProductProfile : Profile
 {

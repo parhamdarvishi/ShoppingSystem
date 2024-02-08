@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using MediatR;
+﻿using MediatR;
 using ShoppingSystem.Product.Application.Contracts;
 using ShoppingSystem.Shared.Response;
 
