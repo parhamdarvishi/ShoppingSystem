@@ -2,6 +2,7 @@
 using ShoppingSystem.Product.Application;
 using ShoppingSystem.Product.Domain.Entities;
 using ShoppingSystem.Shared.Response;
+using System.Reflection;
 
 namespace ShoppingSystem.Product.Infrastructure.Persistence;
 
@@ -17,6 +18,7 @@ public class ApplicationDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
+        builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         base.OnModelCreating(builder);
     }
 }

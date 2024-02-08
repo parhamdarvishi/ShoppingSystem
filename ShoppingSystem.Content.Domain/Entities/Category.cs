@@ -1,10 +1,10 @@
-﻿namespace ShoppingSystem.Content.Domain.Entities;
+﻿using ShoppingSystem.Contant.Domain.Contracts;
 
-public class Category
+namespace ShoppingSystem.Content.Domain.Entities;
+
+public class Category: FullBaseEntity<int>
 {
-    public int Id { get; set; }
     public string Name { get; set; }
-    public bool IsDelete { get; set; }
-    public DateTime CreateAt { get; set; }
 
+    public ICollection<Content> Contents { get; set; }
 }

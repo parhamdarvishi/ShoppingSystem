@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ShoppingSystem.Contant.Domain.Contracts;
 
 namespace ShoppingSystem.Content.Domain.Entities;
 
-public class ContentAttachment
+public class ContentAttachment: FullBaseEntity<int>
 {
-    public int Id { get; set; }
     public string downloadToken { get; set; }
     public string downloadPath { get; set; }
 }

@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ShoppingSystem.Contant.Domain.Contracts;
 
 namespace ShoppingSystem.Content.Domain.Entities;
 
-public class Master
+public class Master: FullBaseEntity<int>
 {
-    public int Id { get; set; }
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public string JobTitle { get; set; }
