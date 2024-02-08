@@ -40,7 +40,7 @@ public partial class Response
     }
 }
 
-public class Response<T>(T result, Errors[] errors = null) : Response(errors)
+public class Response<T>(T result, Errors[] errors = null, HttpStatusCode statusCode = HttpStatusCode.OK) : Response(errors, statusCode)
 {
     public T Result { get; init; } = result;
 }

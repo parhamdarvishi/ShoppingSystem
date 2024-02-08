@@ -7,15 +7,11 @@ namespace ShoppingSystem.Product.Application.Usecases.Product.Queries.GetAllProd
 
 public class GetAllProductsHandler : IRequestHandler<GetAllProductsQuery, Response<object>>
 {
-    private readonly IMediator _mediator;
-    private readonly IMapper _mapper;
     private readonly IProductRepository _repository;
 
-    public GetAllProductsHandler(IProductRepository repository, IMapper mapper, IMediator mediator)
+    public GetAllProductsHandler(IProductRepository repository)
     {
         _repository = repository;
-        _mapper = mapper;
-        _mediator = mediator;
     }
 
     public async Task<Response<object>> Handle(GetAllProductsQuery request, CancellationToken cancellationToken)

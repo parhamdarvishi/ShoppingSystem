@@ -1,15 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.AspNetCore.Mvc;
 using ShoppingSystem.Identity.Application.Dtos.Authentication;
 using ShoppingSystem.Identity.Application.Interfaces;
-using ShoppingSystem.Identity.Domains.Entities;
-using ShoppingSystem.Identity.Infrastructure.Repositories;
-using ShoppingSystem.Shared.Response;
-using System.IdentityModel.Tokens.Jwt;
-using System.Net;
-using System.Security.Claims;
-using System.Text;
 
 namespace ShoppingSystem.Identity.Controllers
 {
@@ -45,7 +36,7 @@ namespace ShoppingSystem.Identity.Controllers
             {
                 return BadRequest();
             }
-            return Ok(new Response(message: "Registered successfully!", statusCode: HttpStatusCode.OK));
+            return Ok();
         }
 
         

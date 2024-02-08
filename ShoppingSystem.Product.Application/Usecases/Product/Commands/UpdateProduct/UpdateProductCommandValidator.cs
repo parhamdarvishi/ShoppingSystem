@@ -1,19 +1,20 @@
 ﻿using FluentValidation;
-using ShppingSystem.Product.Api.Dtos;
+using ShoppingSystem.Product.Application.Usecases.Product.Commands.UpdateProduct;
 
 namespace ShoppingSystem.Product.Api.Validators;
 
-public class AddProductDtoValidator : AbstractValidator<AddProductDto>
+public class UpdateProductCommandValidator : AbstractValidator<UpdateProductCommand>
 {
-    public AddProductDtoValidator()
+    public UpdateProductCommandValidator()
     {
-        RuleFor(x => x.name)
+
+        RuleFor(x => x.Name)
             .NotEmpty()
             .NotNull()
             .MinimumLength(2)
             .WithMessage("Please enter valid name");
 
-        RuleFor(x => x.description)
+        RuleFor(x => x.Description)
             .NotEmpty()
             .NotNull()
             .MinimumLength(2)

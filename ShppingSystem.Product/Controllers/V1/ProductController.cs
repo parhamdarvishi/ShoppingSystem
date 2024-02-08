@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ShoppingSystem.Product.Api.Dtos;
 using ShoppingSystem.Product.Application.Usecases.Product.Commands.AddProduct;
+using ShoppingSystem.Product.Application.Usecases.Product.Commands.DeleteProduct;
+using ShoppingSystem.Product.Application.Usecases.Product.Commands.UpdateProduct;
 using ShoppingSystem.Product.Application.Usecases.Product.Queries.GetAllProducts;
 using ShoppingSystem.Product.Application.Usecases.Product.Queries.GetProductById;
 using System.Net.Mime;
@@ -34,30 +35,13 @@ public class ProductController : BaseController
     [Consumes(MediaTypeNames.Application.Json)]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public IActionResult Delete([FromRoute] int id)
-    {
-        var item = _repository.GetById(id: id);
-        if (item is null)
-            return NotFound();
-        bool deleted = _repository.Delete(item);
-        if (deleted)
-            return Ok();
-        else
-            return BadRequest();
-    }
+    public async Task<IActionResult> Delete([FromRoute] int id, CancellationToken ct = default)
+        => await SendAsync(new DeleteProductCommand(id), ct);
 
     [HttpPut]
     [Consumes(MediaTypeNames.Application.Json)]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public IActionResult Update([FromBody] UpdateProductDto productDto)
-    {
-        var product = _mapper.Map<UpdateProductDto, Domain.Entities.Product>(productDto);
-
-        bool updated = _repository.Update(product);
-        if (updated)
-            return Ok();
-        else
-            return BadRequest();
-    }
+    public async Task<IActionResult> Update([FromBody] UpdateProductCommand updateProductCommand, CancellationToken ct = default)
+        => await SendAsync(updateProductCommand, ct);
 }
