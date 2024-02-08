@@ -18,11 +18,30 @@ public class BaseController : ControllerBase
         if (result.IsSuccess)
             return Ok(result);
 
-        return new ObjectResult(result);
-        //return new ObjectResult(result.ToProblemDetails())
-        //{
-        //    StatusCode = (int)result.StatusCode
-        //};
+        return Ok(result);
+
     }
 
+    private async Task<ObjectResult> SendAsync<T>(IRequest<Response<T>> request, CancellationToken ct = default)
+    {
+        var result = await Mediator.Send(request, ct);
+
+        if (result.IsSuccess)
+            return Ok(result);
+
+        return Ok(result);
+
+    }
+
+    protected async Task<ObjectResult> SendAsync(IRequest<Response<object>> request, CancellationToken ct = default)
+        => await SendAsync<object>(request, ct);
+
+    protected async Task<ObjectResult> SendAsync(IRequest<Response<Guid>> request, CancellationToken ct = default)
+        => await SendAsync<Guid>(request, ct);
+
+    protected async Task<ObjectResult> SendAsync(IRequest<Response<int>> request, CancellationToken ct = default)
+        => await SendAsync<int>(request, ct);
+
+    protected async Task<ObjectResult> SendAsync(IRequest<Response<long>> request, CancellationToken ct = default)
+        => await SendAsync<long>(request, ct);
 }
