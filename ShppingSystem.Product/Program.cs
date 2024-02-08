@@ -1,11 +1,9 @@
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using ShoppingSystem.Product.Api.Middleware;
-using ShoppingSystem.Product.Api.Profiles;
 using ShoppingSystem.Product.Application;
 using ShoppingSystem.Product.Infrastructure;
 using ShppingSystem.Product.Api.Extenstions;
-using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,7 +25,8 @@ builder.Services
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddValidatorsFromAssemblyContaining<Program>();
 
-builder.Services.AddAutoMapper(typeof(ProductProfile));
+
+
 
 var app = builder.Build();
 
