@@ -18,7 +18,7 @@ internal class UnitOfWork : IUnitOfWork
 
     public IGenericRepository<T> Repository<T>() where T : class
     {
-        throw new NotImplementedException();
+        return new GenericRepository<T>(_dbContext);
     }
 
     public void Dispose()
