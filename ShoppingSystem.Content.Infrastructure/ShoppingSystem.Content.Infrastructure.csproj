@@ -19,4 +19,8 @@
     <ProjectReference Include="..\ShoppingSystem.Content.Domain\ShoppingSystem.Content.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>
