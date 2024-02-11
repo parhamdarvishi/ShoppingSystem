@@ -1,0 +1,6 @@
+@ShoppingSystem.Gateway_HostAddress = http://localhost:5138
+
+GET {{ShoppingSystem.Gateway_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

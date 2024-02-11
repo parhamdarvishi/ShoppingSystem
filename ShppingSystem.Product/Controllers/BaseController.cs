@@ -4,7 +4,7 @@ using ShoppingSystem.Shared.Response;
 
 namespace ShoppingSystem.Product.Api.Controllers;
 
-[Route("api/v1/[controller]")]
+[Route("/product/api/v{v:apiVersion}/[controller]/[action]")]
 [ApiController]
 public class BaseController : ControllerBase
 {
