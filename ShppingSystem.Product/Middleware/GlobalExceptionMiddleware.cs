@@ -1,14 +1,17 @@
 ﻿using Newtonsoft.Json;
+using ShppingSystem.Product.Api.Extenstions;
 using System.Net;
 
 namespace ShoppingSystem.Product.Api.Middleware;
 
 public class GlobalExceptionMiddleware
 {
+    private readonly ILogger<GlobalExceptionMiddleware> _logger;
     private readonly RequestDelegate _next;
 
-    public GlobalExceptionMiddleware(RequestDelegate next)
+    public GlobalExceptionMiddleware(RequestDelegate next, ILogger<GlobalExceptionMiddleware> logger)
     {
+        _logger = logger;
         _next = next;
     }
 
@@ -20,6 +23,7 @@ public class GlobalExceptionMiddleware
         }
         catch (Exception ex)
         {
+            _logger.Log(logLevel: LogLevel.Error,message: ex.Message);
             await HandleExceptionAsync(context, ex);
         }
     }

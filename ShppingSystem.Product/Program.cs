@@ -1,12 +1,9 @@
 using Asp.Versioning;
-using FluentValidation;
-using FluentValidation.AspNetCore;
 using ShoppingSystem.Product.Api.Middleware;
 using ShoppingSystem.Product.Application;
-using ShoppingSystem.Product.Application.Usecases.Product.Queries.GetAllProducts;
 using ShoppingSystem.Product.Infrastructure;
 using ShppingSystem.Product.Api.Extenstions;
-using System.Reflection;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +22,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Host.UseSerilog((context, configuration) => configuration.ReadFrom.Configuration(context.Configuration));
 
 builder.Services.AddApiVersioning(options =>
 {
@@ -56,5 +55,7 @@ app.MapControllers();
 app.UseLogUrl();
 
 app.UseGlobalException();
+
+app.UseSerilogRequestLogging();
 
 app.Run();
