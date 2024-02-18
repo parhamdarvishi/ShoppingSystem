@@ -12,7 +12,7 @@ using ShoppingSystem.Product.Infrastructure.Persistence;
 namespace ShoppingSystem.Product.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240208144837_db-init")]
+    [Migration("20240211200740_db-init")]
     partial class dbinit
     {
         /// <inheritdoc />
