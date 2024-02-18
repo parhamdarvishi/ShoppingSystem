@@ -11,10 +11,18 @@ public class ApplicationDbContext : DbContext
     {
     }
 
+    protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
+    {
+        configurationBuilder.Properties<string>().HaveMaxLength(200);
+        configurationBuilder.Properties<string>().AreUnicode(false);
+    }
+
     public DbSet<Domain.Entities.Content> Contents { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
+        builder.HasDefaultSchema("BASE");
+
         //For configuration
         builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 

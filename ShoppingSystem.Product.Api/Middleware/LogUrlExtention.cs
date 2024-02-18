@@ -1,4 +1,6 @@
-﻿namespace ShppingSystem.Product.Api.Extenstions
+﻿using Serilog;
+
+namespace ShppingSystem.Product.Api.Extenstions
 {
     public class LogUrlMiddleware
     {
