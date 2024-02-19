@@ -1,10 +1,18 @@
-//https://learn.microsoft.com/en-us/aspnet/core/tutorials/min-web-api?view=aspnetcore-8.0&tabs=visual-studio
-
-// using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace ShoppingSystem.Captcha.Api.Context;
 
-public class ApplicationDbContext//: DbContext
+public class ApplicationDbContext: DbContext
 {
+    public ApplicationDbContext(DbContextOptions options) : base(options)
+    {
+    }
 
+    public DbSet<Entities.Captcha> Captchas { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder builder)
+    {
+        base.OnModelCreating(builder);
+    }
+    
 }
