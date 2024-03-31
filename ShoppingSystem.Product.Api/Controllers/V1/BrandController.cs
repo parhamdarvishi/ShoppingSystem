@@ -15,8 +15,9 @@ public class BrandController : BaseController
     [ProducesResponseType(StatusCodes.Status200OK)]
     public IActionResult GetById([FromRoute] int id)
     {
-        var item = _repository.GetByIdAsync(id);
-        return Ok(item);
+        //var item = _repository.GetByIdAsync(id);
+        //return Ok(item);
+        return Ok();
     }
 
 }

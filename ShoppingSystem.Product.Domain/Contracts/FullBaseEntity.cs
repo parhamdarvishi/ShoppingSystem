@@ -1,4 +1,6 @@
-﻿namespace ShoppingSystem.Product.Domain.Contracts;
+﻿#nullable disable
+
+namespace ShoppingSystem.Product.Domain.Contracts;
 
 public abstract class FullBaseEntity<TId> : IDeletableEntity, IAuditableEntity
 {
