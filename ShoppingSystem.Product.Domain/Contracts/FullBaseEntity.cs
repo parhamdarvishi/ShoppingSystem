@@ -16,10 +16,15 @@ public abstract class FullBaseEntity<TId> : IDeletableEntity, IAuditableEntity
     {
         get
         {
-            if (DeletedAt is not null || DeletedAt != DateTime.MinValue)
+            if (DeletedAt is not null && DeletedAt != DateTime.MinValue)
                 return true;
             else
                 return false;
+        }
+
+        set
+        {
+
         }
     }
 
