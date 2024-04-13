@@ -21,6 +21,11 @@ public abstract class FullBaseEntity<TId> : IDeletableEntity, IAuditableEntity
             else
                 return false;
         }
+
+        set
+        {
+
+        }
     }
 
 }
